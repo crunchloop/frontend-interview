@@ -13,6 +13,7 @@ import {
   ApiCreatedResponse,
   ApiOkResponse,
   ApiOperation,
+  ApiParam,
   ApiTags,
 } from '@nestjs/swagger';
 import { CreateTodoListDto } from './dtos/create-todo-list.dto';
@@ -51,6 +52,7 @@ export class TodoListsController {
   @ApiOperation({
     summary: 'Get a todo list by id',
   })
+  @ApiParam({ name: 'todoListId', description: 'The id of the todo list', type: Number })
   @ApiOkResponse({ description: 'A todo list', type: TodoList })
   findOne(@Param() param: { todoListId: number }): TodoList {
     return this.todoListsService.findOne(param.todoListId);
@@ -60,6 +62,7 @@ export class TodoListsController {
   @ApiOperation({
     summary: 'Update a todo list by id',
   })
+  @ApiParam({ name: 'todoListId', description: 'The id of the todo list', type: Number })
   @ApiBody({ type: UpdateTodoListDto })
   @ApiOkResponse({ description: 'The updated todo list', type: TodoList })
   update(
@@ -73,6 +76,7 @@ export class TodoListsController {
   @ApiOperation({
     summary: 'Delete a todo list by id',
   })
+  @ApiParam({ name: 'todoListId', description: 'The id of the todo list', type: Number })
   @ApiOkResponse({
     description: 'Successfully deleted the requested todo list',
   })
@@ -91,6 +95,7 @@ export class TodoListsController {
   @ApiOperation({
     summary: 'Add a todo item to a todo list',
   })
+  @ApiParam({ name: 'todoListId', description: 'The id of the todo list', type: Number })
   @ApiBody({ type: AddTodoItemDto })
   @ApiCreatedResponse({ description: 'The created todo item', type: TodoItem })
   createTodoItem(
@@ -104,6 +109,7 @@ export class TodoListsController {
   @ApiOperation({
     summary: 'Get all todo items of a todo list',
   })
+  @ApiParam({ name: 'todoListId', description: 'The id of the todo list', type: Number })
   @ApiOkResponse({ description: 'An array of todo items', type: [TodoItem] })
   findAllTodoItems(@Param() param: { todoListId: number }): TodoItem[] {
     return this.todoListsService.findAllTodoItems(param.todoListId);
@@ -113,6 +119,8 @@ export class TodoListsController {
   @ApiOperation({
     summary: 'Get a todo item by id',
   })
+  @ApiParam({ name: 'todoListId', description: 'The id of the todo list', type: Number })
+  @ApiParam({ name: 'todoItemId', description: 'The id of the todo item', type: Number })
   @ApiOkResponse({ description: 'A todo item', type: TodoItem })
   findOneTodoItem(
     @Param() param: { todoListId: number; todoItemId: number },
@@ -127,6 +135,8 @@ export class TodoListsController {
   @ApiOperation({
     summary: 'Update a todo item by id',
   })
+  @ApiParam({ name: 'todoListId', description: 'The id of the todo list', type: Number })
+  @ApiParam({ name: 'todoItemId', description: 'The id of the todo item', type: Number })
   @ApiBody({ type: UpdateTodoItemDto })
   @ApiOkResponse({ description: 'The updated todo item', type: TodoItem })
   updateTodoItem(
@@ -144,6 +154,8 @@ export class TodoListsController {
   @ApiOperation({
     summary: 'Delete a todo item by id',
   })
+  @ApiParam({ name: 'todoListId', description: 'The id of the todo list', type: Number })
+  @ApiParam({ name: 'todoItemId', description: 'The id of the todo item', type: Number })
   @ApiOkResponse({
     description: 'Successfully deleted the requested todo item',
   })
