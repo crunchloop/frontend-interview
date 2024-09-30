@@ -5,13 +5,14 @@ import { TodoList } from './entities/todo-list.entity';
 import { TodoItem } from './entities/todo-item.entity';
 import { AddTodoItemDto } from './dtos/add-todo-item.dto';
 import { UpdateTodoItemDto } from './dtos/update-todo-item.dto';
+import { todoListsData } from './data/todo-lists.data';
 
 @Injectable()
 export class TodoListsService {
   private readonly todolists: TodoList[];
 
   constructor() {
-    this.todolists = [];
+    this.todolists = todoListsData;
   }
 
   findAll(): TodoList[] {
